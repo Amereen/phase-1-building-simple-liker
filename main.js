@@ -3,6 +3,26 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const likeHearts = document.querySelectorAll(".like-glyph");
+for (const heart of likeHearts) {
+  heart.addEventListener('click', clickHeart)
+}
+
+function clickHeart(e) {
+  const heart = e.target
+  mimicServerCall()
+    .then(function (serverMessage) {
+      alert('You notified the server!')
+      alert(serverMessage)
+      heart.innerText = [FULL_HEART.innerText]
+    })
+    .catch(function(error){
+      alert('Something went wrong!')
+    })
+for (const glyph of likeHearts){
+  glyph.addEventListener('click',clickHeart)
+}
+}
 
 
 
@@ -11,9 +31,9 @@ const FULL_HEART = '♥'
 // Don't change the code below: this function mocks the server response
 //------------------------------------------------------------------------------
 
-function mimicServerCall(url="http://mimicServer.example.com", config={}) {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
+function mimicServerCall(url = "http://mimicServer.example.com", config = {}) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
       let isRandomFailure = Math.random() < .2
       if (isRandomFailure) {
         reject("Random server error. Try again.");
